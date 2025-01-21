@@ -1,24 +1,32 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser')
-const indexRouter = require('./routes/index')
-const cors = require('cors')
-const app = express()
+const bodyParser = require('body-parser');
+const indexRouter = require('./routes/index');
+const cors = require('cors');
+
+const app = express();
+
+// MongoDB 연결 URI 출력
 console.log("MongoDB URI:", process.env.MONGO_URI);
 const mongoURI = process.env.MONGO_URI;
 
-// bodyParsor: 프론트엔드로부터 req를 받는데 http의 body를 json 을 object 형태로 바꿔주는 역할 한다. 
-app.use(bodyParser.json())
+// bodyParser: 프론트엔드로부터 요청의 body를 JSON -> 객체 형태로 변환
+app.use(bodyParser.json());
 app.use(cors());
-app.use("/api", indexRouter)
 
+// 라우터 설정
+app.use("/api", indexRouter);
 
-mongoose.connect(mongoURI).then(() => console.log('MongoDB Connected')).catch(err => console.error('DB Connection Error:', err));
+// MongoDB 연결
+mongoose.connect(mongoURI)
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.error('DB Connection Error:', err));
 
+// Heroku에서 제공하는 PORT 사용, 기본값은 5000
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, () => {
-    console.log("server on 5000")
-})
-
-
+// 서버 실행
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
