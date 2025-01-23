@@ -6,8 +6,9 @@ taskController.createTask = async (req, res) => {
     try {
         // 프론트에서 불러오기기
         const { task, isComplete } = req.body;
+        const { userId } = req
         // 새로운 모델 만들기
-        const newTask = new Task({ task, isComplete })
+        const newTask = new Task({ task, isComplete, author: userId })
         // 저장하기 
         await newTask.save()
         // 데이터 보내기 - 유저가 볼수 있게게
@@ -20,7 +21,8 @@ taskController.createTask = async (req, res) => {
 taskController.getTask = async (req, res) => {
     try {
         // 리스트 가져오기 
-        const taskList = await Task.find({})
+        // ,populate - 조인(외래키사용)
+        const taskList = await Task.find({}).populate("author")
         // 리스트 보여주기 
         res.status(200).json({ status: 'ok', data: taskList })
     } catch (error) {

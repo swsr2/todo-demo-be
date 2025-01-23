@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express();
 
 // MongoDB 연결 URI 출력
-console.log("MongoDB URI:", process.env.MONGO_URI);
+// console.log("MongoDB URI:", process.env.MONGO_URI);
 const mongoURI = process.env.MONGO_URI;
 
 // bodyParser: 프론트엔드로부터 요청의 body를 JSON -> 객체 형태로 변환

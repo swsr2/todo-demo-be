@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router()
 const taskApi = require('./task.api')
+const userApi = require('./user.api')
 
 // 라우터 설정
 router.use('/tasks', taskApi)
-// 예) router.use('/user', userApi) 같이 여러개있을수도 있음
+router.use('/user', userApi)
 
 module.exports = router

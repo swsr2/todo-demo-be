@@ -10,6 +10,11 @@ const taskSchema = Schema({
     isComplete: {
         type: Boolean,
         required: true,
+    },
+    author: {
+        type: Schema.Types.ObjectId, // id만 받아옴
+        required: true,
+        ref: "User" // User 모델을 참조할것임
     }
 }, { timestamps: true })
 
