@@ -23,6 +23,9 @@ mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.error('DB Connection Error:', err));
 
+mongoose.connection.on('error', err => {
+    console.error('MongoDB 연결 중 오류 발생:', err);
+});
 // Heroku에서 제공하는 PORT 사용, 기본값은 5000
 const PORT = process.env.PORT || 5000;
 
