@@ -17,18 +17,7 @@ taskController.createTask = async (req, res) => {
         res.status(400).json({ status: 'fail', error: error })
     }
 }
-// 리스트가져오기
-// taskController.getTask = async (req, res) => {
-//     try {
-//         // 리스트 가져오기
-//         // ,populate - 조인(외래키사용)
-//         const taskList = await Task.find({}).populate("author")
-//         // 리스트 보여주기
-//         res.status(200).json({ status: 'ok', data: taskList })
-//     } catch (error) {
-//         res.status(400).json({ status: 'fail', error: error })
-//     }
-// }
+
 taskController.getTask = async (req, res) => {
     try {
         // 데이터 조회 및 populate 수행
